@@ -71,7 +71,7 @@ console_backend_utils:
   release_version: develop
 
 deployment_manager:
-  release_version: develop
+  release_version: PNDA-4560
   keys_directory: /opt/pnda/dm_keys
   admin_user: pnda
 
