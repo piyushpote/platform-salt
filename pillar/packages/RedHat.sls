@@ -126,6 +126,9 @@ snappy:
 sshfs:
   package-name: fuse-sshfs
   version: ""
+swig:
+  package-name: swig
+  version: ""
 unzip:
   package-name: unzip
   version: ""

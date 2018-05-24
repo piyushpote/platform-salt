@@ -1,6 +1,7 @@
 {{ env }}:
 
   '*':
+    - salt
     - volumes
     - tasks.system_update
     - motd

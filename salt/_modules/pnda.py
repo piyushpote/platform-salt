@@ -129,13 +129,25 @@ def generate_http_link(role, suffix):
         return ''
 
 def generate_external_link(role, suffix):
+    cert_string = None
     try:
         cert = __salt__['pillar.get'](role+':cert')
         cert_string = __salt__['cmd.shell']("echo '"+ cert +"' | sed -e '/-----END CERTIFICATE-----/q'")
-        fqdn = __salt__['x509.read_certificate'](cert_string)['Subject']['CN']
-        return 'https://%s%s' % (fqdn, suffix)
     except:
-        return generate_http_link(role, suffix)
+        print('No cert for %s' % role)
+    
+    fqdn = None
+    if cert_string:
+        try:
+            fqdn = __salt__['x509.read_certificate'](cert_string)['Subject']['CN']
+        except Exception as exception:
+            print(exception)
+
+    if fqdn:
+        link = 'https://%s%s' % (fqdn, suffix)
+    else:
+        link = generate_http_link(role, suffix)
+    return link
 
 def cloudera_get_hosts_by_role(service, role_type):
     user = hadoop_manager_username()

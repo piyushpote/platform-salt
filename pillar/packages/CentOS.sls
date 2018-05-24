@@ -123,6 +123,9 @@ ruby-devel:
 snappy:
   package-name: snappy-devel
   version: ""
+swig:
+  package-name: swig
+  version: ""
 sshfs:
   package-name: fuse-sshfs
   version: ""
